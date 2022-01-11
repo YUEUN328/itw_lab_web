@@ -26,7 +26,7 @@
 		<br>
 		<fmt:formatDate value="${now}" type="both" dateStyle="full" timeStyle="full"/>
 		<br>
-		<fmt:formatDate value="${now}" type="both" dateStyle="short" timeStyle="short"/>
+		<fmt:formatDate value="${now}" type="both" dateStyle="short" timeStyle="full"/>
 		<br>
 	</body>
 </html>
