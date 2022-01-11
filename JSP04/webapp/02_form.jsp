@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<h1>입력 페이지</h1>
-		<form action="02_result_if.jsp" method="get">
+		<form action="02_result_choose.jsp" method="get">
 			<input type="text" name="userName" placeholder="사용자 이름 입력" />
 			<br>
 			<select name="color">

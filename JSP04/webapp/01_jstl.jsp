@@ -14,6 +14,7 @@ JSTL 사용 방법:
    파일들을 다운로드하고, project/webapp/WEB-INF/lib 폴더에 복사
 2. taglib 지시자(directive) 작성   
 --%>  
+
 <!DOCTYPE html>
 <html>
 	<head>
