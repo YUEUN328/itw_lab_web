@@ -10,8 +10,8 @@ import edu.web.domain.Board;
 public interface BoardDao {
 
 	String SQL_SELECT_ALL = String.format(
-			"select * from %S", 
-			TABLE_BOARD);
+			"select * from %S order by %S desc", 
+			TABLE_BOARD, COL_BNO);
 	
 	/**
 	 * DB BOARDS 테이블에서 전체 검색 결과를 리턴하는 메서드.

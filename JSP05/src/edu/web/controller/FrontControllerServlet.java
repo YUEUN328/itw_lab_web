@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.web.controller.board.BoardInsertController;
 import edu.web.controller.board.BoardMainController;
 import edu.web.controller.user.UserMainController;
+
+import static edu.web.controller.Action.REDIRECT_PREFIX;
 
 /**
  * Servlet implementation class FrontControllerServlet
@@ -48,6 +51,7 @@ public class FrontControllerServlet extends HttpServlet {
 		
 		commands.put("/", new MainController());
 		commands.put("/board/main", new BoardMainController());
+		commands.put("/board/insert", new BoardInsertController());
 		
 		commands.put("/user/main", new UserMainController());
 	}
@@ -85,10 +89,19 @@ public class FrontControllerServlet extends HttpServlet {
 		String view = controller.execute(request, response); // 위임(delegation)
 		System.out.println("view: " + view);
 		
-		// TODO: forward vs redirect 선택
+		// forward vs redirect 선택 - view가 "redirect:" 문자열로 시작하는지를 체크
+		if (view.startsWith(REDIRECT_PREFIX)) { // view가 "redirect:" 접두사로 시작
+			// "redirect:" 접두사를 제거하고, 페이지를 redirect 방식으로 이동
+			String target = view.substring(REDIRECT_PREFIX.length());
+			System.out.println("target: " + target);
+			response.sendRedirect(target);
+			// sendRedirect()를 호출하면 새로운 request와 response 객체가 생성되고, 
+			// 새로운 요청이 웹 서버로 전송
+		} else {
+			// 요청을 View 페이지로 이동(forward)
+			request.getRequestDispatcher(view).forward(request, response);
+		}
 		
-		// 요청을 View 페이지로 이동(forward)
-		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 }

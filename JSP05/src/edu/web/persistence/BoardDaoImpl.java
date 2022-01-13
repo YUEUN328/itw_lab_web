@@ -76,7 +76,7 @@ public class BoardDaoImpl implements BoardDao {
 			}
 		}
 		
-		return null;
+		return list;
 	}
 
 }

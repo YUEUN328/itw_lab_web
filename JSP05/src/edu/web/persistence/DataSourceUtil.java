@@ -19,7 +19,7 @@ public class DataSourceUtil {
 	private DataSourceUtil() {}
 	
 	public static DataSource getDataSource() {
-		System.out.println("DataSourceUtil.getDataSource() 메서드 호출");
+//		System.out.println("DataSourceUtil.getDataSource() 메서드 호출");
 		
 		Context initContext;
 		Context envContext;
@@ -33,7 +33,7 @@ public class DataSourceUtil {
 			
 			// 환경설정 정보에 정의된 리소스(jdbc/myoracle)를 찾음
 			ds = (DataSource) envContext.lookup("jdbc/myoracle");
-			System.out.println("DataSource: " + ds);
+//			System.out.println("DataSource: " + ds);
 			
 		} catch (NamingException e) {
 			e.printStackTrace();
