@@ -12,7 +12,7 @@ public class BoardMainController implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO 게시글 전체 목록을 검색한 결과를 View(JSP)에 전달
 		
-		return "/WEB-INF/board/board-main.jsp";
+		return "/WEB-INF/board/board-main.jsp"; 
 	}
 
 }

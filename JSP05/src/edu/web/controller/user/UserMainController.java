@@ -11,7 +11,7 @@ public class UserMainController implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO 
 		
-		return "/WEB-INF/user/user-main.jsp";
+		return "/WEB-INF/user/user-main.jsp"; 
 	}
 
 }
