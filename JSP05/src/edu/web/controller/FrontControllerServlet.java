@@ -45,8 +45,10 @@ public class FrontControllerServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// 요청 주소와 요청 주소를 처리할 Controller 클래스의 객체를 매핑시켜서 등록.
 		commands = new HashMap<String, Action>();
+		
 		commands.put("/", new MainController());
 		commands.put("/board/main", new BoardMainController());
+		
 		commands.put("/user/main", new UserMainController());
 	}
 
