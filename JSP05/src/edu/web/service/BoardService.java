@@ -23,4 +23,14 @@ public interface BoardService {
 	 */
 	int registerNewBoard(Board board);
 	
+	/**
+	 * 글 상세보기 서비스:
+	 * (1) 글 번호(bno)를 전달받아서 해당 글 번호의 모든 내용을 검색.
+	 * (2) 해당 글 번호의 조회수를 1 증가.
+	 * 해당 글 번호의 Board 객체를 리턴.
+	 * 
+	 * @param bno 검색하려는 글 번호(primary key).
+	 * @return bno의 게시글 정보를 가지고 있는 Board 객체.
+	 */
+	Board select(int bno);
 }

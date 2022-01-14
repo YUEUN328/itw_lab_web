@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import edu.web.domain.Board;
 import edu.web.persistence.BoardDao;
 import edu.web.persistence.BoardDaoImpl;
+import edu.web.persistence.UserDao;
+import edu.web.persistence.UserDaoImpl;
 
 /**
  * Servlet implementation class TestServlet
@@ -33,9 +35,29 @@ public class TestServlet extends HttpServlet {
 		}
 		*/
 		
+		/*
 		Board b = new Board(0, "test 0114", "테스트_20220114", "admin", null, 0, 0, null);
 		int result = dao.create(b);
 		System.out.println("insert result = " + result);
+		*/
+		
+		UserDao userDao = UserDaoImpl.getInstance();
+		/*
+		int result = userDao.update(10, "admin");
+		System.out.println("update point 결과 = " + result);
+		*/
+		
+		/*
+		Board board = dao.read(1);
+		System.out.println(board.getBno());
+		System.out.println(board.getTitle());
+		System.out.println(board.getContent());
+		System.out.println(board.getUserId());
+		System.out.println(board.getRegDate());
+		*/
+		
+		int result = dao.update(2);
+		System.out.println("조회수 증가 결과 = " + result);
 	}
 
 }

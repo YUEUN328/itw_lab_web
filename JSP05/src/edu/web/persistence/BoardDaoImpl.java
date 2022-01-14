@@ -104,7 +104,80 @@ public class BoardDaoImpl implements BoardDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			try {
+				// 사용했던 리소스 반환 - Connection 객체를 Connection Pool로 반환
+				DataSourceUtil.close(conn, pstmt);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Board read(int bno) {
+		System.out.println("boardDaoImpl.read(bno=" + bno + ") 메서드 호출");
+		
+		Board board = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(SQL_SELECT_BY_BNO);
+			System.out.println(SQL_SELECT_BY_BNO);
+			pstmt.setInt(1, bno);
 			
+			rs = pstmt.executeQuery();
+			if (rs.next()) { // 검색된 결과가 있으면
+				String title = rs.getString(COL_TITLE);
+				String content = rs.getString(COL_CONTENT);
+				String userId = rs.getString(COL_USERID);
+				Date regDate = rs.getDate(COL_REG_DATE);
+				int viewCount = rs.getInt(COL_VIEW_CNT);
+				int replyCount = rs.getInt(COL_REPLY_CNT);
+				
+				board = new Board(bno, title, content, userId, regDate, viewCount, replyCount, null);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				DataSourceUtil.close(conn, pstmt, rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return board;
+	}
+
+	@Override
+	public int update(int bno) {
+		System.out.println("boardDaoImpl.update(bno=" + bno + ") 메서드 호출");
+		
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(SQL_UPDATE_VIEW_COUNT);
+			System.out.println(SQL_UPDATE_VIEW_COUNT);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				DataSourceUtil.close(conn, pstmt);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return result;
