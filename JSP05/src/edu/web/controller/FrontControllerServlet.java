@@ -94,6 +94,7 @@ public class FrontControllerServlet extends HttpServlet {
 			// "redirect:" 접두사를 제거하고, 페이지를 redirect 방식으로 이동
 			String target = view.substring(REDIRECT_PREFIX.length());
 			System.out.println("target: " + target);
+			
 			response.sendRedirect(target);
 			// sendRedirect()를 호출하면 새로운 request와 response 객체가 생성되고, 
 			// 새로운 요청이 웹 서버로 전송

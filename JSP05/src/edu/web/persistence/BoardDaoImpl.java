@@ -24,7 +24,7 @@ public class BoardDaoImpl implements BoardDao {
 	private static BoardDaoImpl instance = null;
 	
 	private BoardDaoImpl() {
-		ds = DataSourceUtil.getDataSource();
+		ds = DataSourceUtil.getDataSource(); // WAS가 생성하고 관리하는 DataSource 객체를 얻어옴
 	}
 	
 	public static BoardDaoImpl getInstance() {
@@ -77,6 +77,37 @@ public class BoardDaoImpl implements BoardDao {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public int create(Board board) {
+		System.out.println("boardDaoImpl.create(board) 메서드 호출");
+		
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			// Connection Pool에서 Connection 하나를 빌려옴
+			conn = ds.getConnection();
+			
+			// DB 서버에 전송할 SQL 문장 작성
+			pstmt = conn.prepareStatement(SQL_INSERT_BOARD);
+			System.out.println(SQL_INSERT_BOARD);
+			pstmt.setString(1, board.getTitle()); // SQL의 첫 번째 ?를 title로 대체
+			pstmt.setString(2, board.getContent()); // SQL의 두 번째 ?를 content로 대체
+			pstmt.setString(3, board.getUserId()); // SQL의 세 번째 ?를 userId로 대체
+			
+			// SQL 실행
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		
+		return result;
 	}
 
 }

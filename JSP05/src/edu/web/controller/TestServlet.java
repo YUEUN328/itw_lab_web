@@ -26,10 +26,16 @@ public class TestServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		BoardDao dao = BoardDaoImpl.getInstance();
+		/*
 		List<Board> list = dao.read();
 		for (Board b : list) {
 			System.out.println(b.getBno() + ", " + b.getTitle());
 		}
+		*/
+		
+		Board b = new Board(0, "test 0114", "테스트_20220114", "admin", null, 0, 0, null);
+		int result = dao.create(b);
+		System.out.println("insert result = " + result);
 	}
 
 }
