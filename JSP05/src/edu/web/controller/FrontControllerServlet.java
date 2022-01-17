@@ -82,16 +82,16 @@ public class FrontControllerServlet extends HttpServlet {
 		// request 객체가 가지고 있는 정보들
 		// URL: 프로토콜(protocol) + 서버 주소(이름) + 포트번호 + URI(Context Path + 하위 주소 + Query String)
 		StringBuffer url = request.getRequestURL();
-		System.out.println("Request URL: " + url);
+		System.out.println(">> Request URL: " + url);
 		
 		String uri = request.getRequestURI();
-		System.out.println("Request URI: " + uri);
+		System.out.println(">> Request URI: " + uri);
 		
 		String contextPath = request.getContextPath();
-		System.out.println("Context Path: " + contextPath);
+		System.out.println(">> Context Path: " + contextPath);
 		
 		String path = uri.substring(contextPath.length());
-		System.out.println("path: " + path);
+		System.out.println(">> path: " + path);
 		
 		// 요청 파라미터(request parameter)에 포함되어 있는 한글을 처리하기 위해서
 		request.setCharacterEncoding("UTF-8");

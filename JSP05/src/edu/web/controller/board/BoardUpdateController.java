@@ -51,7 +51,7 @@ public class BoardUpdateController implements Action {
 		
 		int result = boardService.update(board);
 		
-		return "redirect:main";
+		return REDIRECT_PREFIX + "main";
 	}
 	
 }
