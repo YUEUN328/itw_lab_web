@@ -16,7 +16,7 @@
 	<body>
 		<div class="container-fluid">
 			<header class="jumbotron text-center">
-				<h1>글 상세 보기 페이지</h1>
+				<h1>글 상세보기 페이지</h1>
 			</header>
 			
 			<nav> <!-- navigation menu -->
@@ -28,8 +28,7 @@
 						<a  class="nav-link" href="./main">게시판 메인</a>
 					</li>
 					<li class="nav-item">
-						<!-- TODO -->
-						<a class="nav-link">수정하기</a>
+						<a class="nav-link" href="./update?bno=${board.bno}">수정하기</a>
 					</li>
 				</ul>
 			</nav>

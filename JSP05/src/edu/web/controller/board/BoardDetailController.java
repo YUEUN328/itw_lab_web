@@ -14,6 +14,8 @@ public class BoardDetailController implements Action {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("boardDetailController.execute() 메서드 호출");
+		
 		// 제목을 클릭했을 때 해당 글 번호(bno)의 모든 내용을 보여주는 페이지 
 		// 1. request 객체에서 요청 파라미터 bno의 값을 읽음
 		int bno = Integer.parseInt(request.getParameter("bno"));
