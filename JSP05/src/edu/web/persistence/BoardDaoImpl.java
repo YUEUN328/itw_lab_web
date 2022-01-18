@@ -253,14 +253,14 @@ public class BoardDaoImpl implements BoardDao {
 		System.out.println("boardDaoImpl.read(type=" + type + ", keyword=" + keyword + ") 메서드 호출");
 		
 		List<Board> list = new ArrayList<Board>();
-	
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			conn = ds.getConnection();
 			
-			String searchKeyword = "%s" + keyword.toLowerCase() + "%s";
+			String searchKeyword = "%" + keyword.toLowerCase() + "%";
 			System.out.println("searchKeyword:" + searchKeyword);
 			
 			switch (type) {
@@ -269,12 +269,12 @@ public class BoardDaoImpl implements BoardDao {
 				pstmt = conn.prepareStatement(SQL_SELECT_BY_TITLE);
 				pstmt.setString(1, searchKeyword);
 				break;
-			case 2: 
+			case 2:
 				System.out.println(SQL_SELECT_BY_CONTENT);
 				pstmt = conn.prepareStatement(SQL_SELECT_BY_CONTENT);
 				pstmt.setString(1, searchKeyword);
 				break;
-			case 3: 
+			case 3:
 				System.out.println(SQL_SELECT_BY_TITLE_OR_CONTENT);
 				pstmt = conn.prepareStatement(SQL_SELECT_BY_TITLE_OR_CONTENT);
 				pstmt.setString(1, searchKeyword);
@@ -284,6 +284,7 @@ public class BoardDaoImpl implements BoardDao {
 				System.out.println(SQL_SELECT_BY_USERID);
 				pstmt = conn.prepareStatement(SQL_SELECT_BY_USERID);
 				pstmt.setString(1, searchKeyword);
+				break;
 			}
 			
 			rs = pstmt.executeQuery();
@@ -291,18 +292,24 @@ public class BoardDaoImpl implements BoardDao {
 				int bno = rs.getInt(COL_BNO);
 				String title = rs.getString(COL_TITLE);
 				String content = rs.getString(COL_CONTENT);
-				String userid = rs.getString(COL_USERID);
+				String userId = rs.getString(COL_USERID);
 				Date regDate = rs.getDate(COL_REG_DATE);
-				int viewCnt = rs.getInt(COL_VIEW_CNT);
-				int replyCnt = rs.getInt(COL_REPLY_CNT);
+				int viewCount = rs.getInt(COL_VIEW_CNT);
+				int replyCount = rs.getInt(COL_REPLY_CNT);
 				
-				Board b = new Board(bno, title, content, userid, regDate, viewCnt, replyCnt, null);
-				list.add(b);				
+				Board b = new Board(bno, title, content, userId, regDate, viewCount, replyCount, null);
+				list.add(b);
 			}
 			System.out.println("# of search: " + list.size());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				DataSourceUtil.close(conn, pstmt, rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return list;

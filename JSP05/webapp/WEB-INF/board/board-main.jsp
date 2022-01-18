@@ -64,6 +64,7 @@
 								<td>
 									<a href="detail?bno=${b.bno}">${b.title}</a>
 								</td>
+								<!-- b.getUserId() 메서드 호출 -->
 								<td>${b.userId}</td>
 								<fmt:formatDate value="${b.regDate}" 
 									pattern="yyyy-MM-dd HH:mm:ss"
