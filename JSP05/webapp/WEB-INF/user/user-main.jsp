@@ -23,7 +23,7 @@
 			<nav> <!-- 기능 메뉴 -->
 				<ul class="nav nav-tabs">
 					<li class="nav-item">
-						<a class="nav-link" href="../">메인 페이지 돌아가기</a> 
+						<a class="nav-link" href="../">메인 페이지 돌아가기</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="insert">신규 회원 등록</a>
