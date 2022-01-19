@@ -24,7 +24,7 @@ public class VisitCountServlet extends HttpServlet {
 		int count = 0; // 방문 횟수
 		
 		// 브라우저가 보낸 쿠키들을 확인
-		Cookie[] cookies = request.getCookies();
+		Cookie[] cookies  = request.getCookies();
 		if (cookies != null) {
 			for (Cookie c : cookies) {
 				String cookieName = c.getName();
@@ -35,7 +35,7 @@ public class VisitCountServlet extends HttpServlet {
 			}
 		}
 		
-		// 서버에서 브라우저로 visitCount 이름을 갖는 쿠키를 생성해서 보냄
+		// 서버에서 브라우저로 visitCount 이름을 갖는 쿠키를 생성해서 보냄.
 		Cookie cookie = new Cookie("visitCount", String.valueOf(count)); // "" + count
 		response.addCookie(cookie);
 		
