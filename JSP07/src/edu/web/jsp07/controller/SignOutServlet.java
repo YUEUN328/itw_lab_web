@@ -6,16 +6,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import edu.web.jsp07.model.User;
-import edu.web.jsp07.persistence.UserDao;
-import edu.web.jsp07.persistence.UserDaoImpl;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class TestController
+ * Servlet implementation class SignOutServlet
  */
-@WebServlet(name = "testController", urlPatterns = { "/test" })
-public class TestController extends HttpServlet {
+@WebServlet(name = "signOutServlet", urlPatterns = { "/signout" })
+public class SignOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -24,10 +21,15 @@ public class TestController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		// BoardDaoImpl의 checkSignIn 메서드 테스트
-		UserDao userDao = UserDaoImpl.getInstance();
-		User user = userDao.checkSignIn("Guest", "guest");
-		System.out.println(user);
+		System.out.println("signOutServlet.doGet() 호출");
+		
+		// 로그아웃 처리
+//		request.getSession().invalidate();
+		HttpSession session = request.getSession(); // 요청에 해당하는 세션 객체를 찾음
+		session.invalidate(); // 세션을 만료시킴. (WAS가 세션 객체를 지움)
+		
+		// 메인 페이지로 이동
+		response.sendRedirect("main");
 	}
 
 }

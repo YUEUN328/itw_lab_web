@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User checkSighIn(String id, String pw) {
+	public User checkSignIn(String id, String pw) {
 		// argument로 전달받은 아이디/비밀번호와 일치하는 사용자 계정이 있는지 체크
 		// 일치하는 계정이 있으면 User 객체를 리턴. 일치하는 계정이 없으면 null을 리턴
 		

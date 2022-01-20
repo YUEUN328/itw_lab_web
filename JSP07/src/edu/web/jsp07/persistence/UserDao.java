@@ -9,6 +9,6 @@ public interface UserDao {
 			"select * from %s where %s = ? and %s = ?", 
 			TABLE_USERS, COL_USERID, COL_PWD);
 	
-	User checkSighIn(String id, String pw);
+	User checkSignIn(String id, String pw);
 
 }
