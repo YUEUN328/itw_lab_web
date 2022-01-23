@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>MyJSP</display-name>
+
+	<!-- Filter 설정 -->
+	<!-- web.xml 파일의 Filter 설정 순서대로 필터들이 적용됨 
+	@WebFilter 어노테이션은 필터 적용 순서를 지정할 수 없음 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>edu.web.filter.EncodingFilter</filter-class>
+		<init-param> <!-- Filter 클래스의 init() 메서드의 파라미터에 전달되는 값 -->
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern> <!-- 모든 요청 -->
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>authFilter</filter-name>
+		<filter-class>edu.web.filter.AuthenticationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>authFilter</filter-name>
+		<url-pattern>/board/detail</url-pattern>
+		<url-pattern>/board/insert</url-pattern>
+	</filter-mapping>
+
+  <!-- 웹 서버가 실행될 때 context.xml 파일을 보고 생성한 객체(리소스)를 찾음 -->
+  <resource-ref> <!-- resource(객체) reference(참조값, 주소, 지역변수) -->
+  	<description>Oracle Datasource(Connection Pool)</description>
+ 	<res-ref-name>jdbc/myoracle</res-ref-name>
+ 	<res-type>javax.sql.DataSource</res-type>
+ 	<res-auth>Container</res-auth>
+  </resource-ref>
+  
+</web-app>
