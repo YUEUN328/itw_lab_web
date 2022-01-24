@@ -31,9 +31,12 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		
-		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute("userName", "오쌤");
+		// View(jsp 파일)까지 전달할 객체를 model에 속성(attribute)으로 추가
+		// model에 추가된 속성의 이름은 JSP 파일에서는 EL(Expression Language)에서 변수 이름이 됨
+		model.addAttribute("serverTime", formattedDate ); //-> jsp: ${serverTime}
+		model.addAttribute("userName", "오쌤"); //-> jsp: ${userName}
 		
+		// /WEB-INF/views/home.jsp 파일을 찾기 위해서 
 		return "home";
 	}
 	

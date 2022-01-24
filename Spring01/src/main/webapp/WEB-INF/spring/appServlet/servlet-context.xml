@@ -21,6 +21,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 컴포넌트(Controller, Service, Repository) 클래스들을 
+	edu/spring/ex01 폴더와 그 하위 폴더에서 어노테이션을 검색해서 찾고 객체를 생성 -->
 	<context:component-scan base-package="edu.spring.ex01" />
 	
 	
