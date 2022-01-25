@@ -26,4 +26,39 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList(BOARD_NAMESPACE + ".selectAll");
 	}
 
+	@Override
+	public Board read(int bno) {
+		logger.info("boardDaoImpl.read(bno={}) 호출", bno);
+		
+		return sqlSession.selectOne(BOARD_NAMESPACE + ".selectByBno", bno);
+	}
+
+	@Override
+	public int create(Board board) {
+		logger.info("boardDaoImpl.create({}) 호출", board);
+		
+		return sqlSession.insert(BOARD_NAMESPACE + ".create", board);
+	}
+
+	@Override
+	public int update(Board board) {
+		logger.info("boardDaoImpl.update({}) 호출", board);
+		
+		return sqlSession.update(BOARD_NAMESPACE + ".update", board);
+	}
+
+	@Override
+	public int update(int bno) {
+		logger.info("boardDaoImpl.update(bno={}) 호출", bno);
+		
+		return sqlSession.update(BOARD_NAMESPACE + ".updateViewCnt", bno);
+	}
+
+	@Override
+	public int delete(int bno) {
+		logger.info("boardDaoImpl.delete(bno={}) 호출", bno);
+		
+		return sqlSession.delete(BOARD_NAMESPACE + ".delete", bno);
+	}
+
 }

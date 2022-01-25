@@ -27,8 +27,26 @@ public class BoardDaoTest {
 	@Test
 	public void doTest() {
 		logger.info("boardDao: {}", boardDao);
-		List<Board> list = boardDao.read();
-		logger.info("list size = {}", list.size());
+		
+//		List<Board> list = boardDao.read();
+//		logger.info("list size = {}", list.size());
+		
+//		Board board = boardDao.read(1);
+//		logger.info(board.toString());
+		
+//		Board board = new Board(0, "MyBatis-Spring Test", "마이바티스 스프링 테스트", "admin", null, 0, 0, null);
+//		int result = boardDao.create(board);
+//		logger.info("INSERT 결과: {}", result);
+		
+//		Board board = new Board(29, "Update 29번", "업데이트 메서드 테스트", null, null, 0, 0, null);
+//		int result = boardDao.update(board);
+//		logger.info("UPDATE 결과: {}", result);
+		
+//		int result = boardDao.update(29);
+//		logger.info("UPDATE 결과: {}", result);
+		
+		int result = boardDao.delete(29);
+		logger.info("DELETE 결과: {}", result);
 	}
 	
 }
