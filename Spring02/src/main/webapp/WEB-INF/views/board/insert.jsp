@@ -13,20 +13,29 @@
 	</head>
 	<body>
 		<div class="container-fluid">
-			<header class="jumbotron text-center">
-				<h1>메인 페이지</h1>
+			<header class="text-center">
+				<h1>새 글 작성 페이지</h1>
 			</header>
 			
-			<nav>
-				<ul>
-					<li> <!-- TODO -->
-						<a href="">로그인</a>
-					</li>
-					<li>
-						<a href="./board/main">게시판 메인</a>
-					</li>
-				</ul>
+			<nav> <!-- TODO: 페이지 이동 메뉴 -->
 			</nav>
+			
+			<div> <!-- 입력 양식 -->
+				<form method="post"> <!-- /board/insert POST submit -->
+					<div>
+						<input type="text" name="title" placeholder="제목 입력" required autofocus/>
+					</div>
+					<div>
+						<textarea rows="5" name="content" placeholder="내용 입력" required></textarea>
+					</div>
+					<div>
+						<input type="text" name="userid" value="guest" required readonly />
+					</div>
+					<div>
+						<input type="submit" value="작성 완료">
+					</div>
+				</form>
+			</div>
 			
 		</div>
 		

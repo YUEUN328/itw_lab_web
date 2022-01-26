@@ -42,11 +42,15 @@ public class BoardDaoTest {
 //		int result = boardDao.update(board);
 //		logger.info("UPDATE 결과: {}", result);
 		
-//		int result = boardDao.update(29);
-//		logger.info("UPDATE 결과: {}", result);
+//		int result = boardDao.updateViewCnt(24);
+//		logger.info("updateViewCnt 결과: {}", result);
 		
-		int result = boardDao.delete(29);
-		logger.info("DELETE 결과: {}", result);
+//		int result = boardDao.delete(29);
+//		logger.info("DELETE 결과: {}", result);
+		
+		List<Board> list = boardDao.read(4, "테스트");
+		logger.info("키워드 검색 결과: {}개 행", list.size());
+		
 	}
 	
 }

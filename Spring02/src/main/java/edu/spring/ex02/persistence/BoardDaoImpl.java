@@ -1,6 +1,8 @@
 package edu.spring.ex02.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -48,8 +50,8 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int update(int bno) {
-		logger.info("boardDaoImpl.update(bno={}) 호출", bno);
+	public int updateViewCnt(int bno) {
+		logger.info("boardDaoImpl.updateViewCnt(bno={}) 호출", bno);
 		
 		return sqlSession.update(BOARD_NAMESPACE + ".updateViewCnt", bno);
 	}
@@ -59,6 +61,17 @@ public class BoardDaoImpl implements BoardDao {
 		logger.info("boardDaoImpl.delete(bno={}) 호출", bno);
 		
 		return sqlSession.delete(BOARD_NAMESPACE + ".delete", bno);
+	}
+
+	@Override
+	public List<Board> read(int type, String keyword) {
+		logger.info("boardDaoImpl.read(type={}, keyword={})", type, keyword);
+		
+		Map<String, Object> params = new HashMap<>();
+		params.put("type", type);
+		params.put("keyword", "%" + keyword.toLowerCase() + "%");
+		
+		return sqlSession.selectList(BOARD_NAMESPACE + ".selectByKeyword", params);
 	}
 
 }
