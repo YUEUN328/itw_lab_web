@@ -39,7 +39,10 @@ public class BoardServiceImpl implements BoardService {
 	public Board select(int bno) {
 		log.info("select(bno={}) 호출", bno);
 		
-		return boardDao.read(bno);
+		Board board = boardDao.read(bno); // 해당 글 번호의 게시글을 찾음
+		boardDao.updateViewCnt(bno); // 조회수를 증가
+		
+		return board; // 검색한 Board 객체를 리턴
 	}
 
 	@Override
@@ -49,4 +52,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.update(board);
 	}
 	
+	@Override
+	public int delete(int bno) {
+		log.info("delete(bno={}) 호출", bno);
+		
+		return boardDao.delete(bno);
+	}
 }

@@ -77,4 +77,13 @@ public class BoardController {
 		return "redirect:/board/main"; // 게시판 메인으로 이동
 	}
 	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(int bno) {
+		log.info("delete(bno={}) 호출", bno);
+		
+		boardService.delete(bno);
+		
+		return "redirect:/board/main";
+	}
+	
 }
