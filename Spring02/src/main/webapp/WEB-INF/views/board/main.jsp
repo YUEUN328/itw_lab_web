@@ -21,9 +21,16 @@
 	    	
 	    	<nav> <!-- 메뉴 -->
 	    		<ul>
-	    			<li> <!-- TODO -->
-	    				<a href="">로그인</a>
+	    		<c:if test="${empty signInUserId}">
+	    			<li>
+	    				<a href="../user/signin">로그인</a>
 	    			</li>
+	    		</c:if>
+	    		<c:if test="${not empty signInUserId}">
+	    			<li>
+	    				<a href="../user/signout">로그아웃</a>
+	    			</li>
+	    		</c:if>	
 	    			<li>
 	    				<a href="../">메인</a>
 	    			</li>
