@@ -5,6 +5,7 @@
 	
 	<!-- 데이터베이스의 테이블 이름, 컬럼 이름들을 정의 -->
 	<properties>
+		<!-- BOARDS 테이블 관련 상수들 -->
 		<property name="TABLE_BOARDS" value="boards"/>
 		<property name="COL_BNO" value="bno"/>
 		<property name="COL_TITLE" value="title"/>
@@ -14,6 +15,14 @@
 		<property name="COL_VIEW_CNT" value="view_cnt"/>
 		<property name="COL_REPLY_CNT" value="reply_cnt"/>
 		<property name="COL_ATTACHMENT" value="attachment"/>
+		
+		<!-- USERS 테이블 관련 상수들 -->
+		<property name="TABLE_USERS" value="users" />
+		<!-- BOARDS 테이블의 userid 컬럼 이름은 동일하므로 생략 -->
+		<property name="COL_PWD" value="pwd" />
+		<property name="COL_EMAIL" value="email" />
+		<property name="COL_POINTS" value="points" />
+		
 	</properties>
 	
 	<typeAliases>

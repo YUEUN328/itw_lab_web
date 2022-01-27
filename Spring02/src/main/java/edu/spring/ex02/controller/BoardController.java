@@ -86,4 +86,15 @@ public class BoardController {
 		return "redirect:/board/main";
 	}
 	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(int type, String keyword, Model model) {
+		log.info("search(type={}, keyword={})", type, keyword);
+		
+		List<Board> list = boardService.select(type, keyword); // 검색 결과
+		// 검색 결과를 Model 객체에 속성(attribute)으로 추가해서 view에 전달
+		model.addAttribute("boardList", list); // jsp 파일에서 ${boardList} EL로 사용되기 때문에
+		
+		return "board/main"; // "/WEB-INF/views/" + "board/main" + ".jsp" 파일을 view로 사용
+	}
+
 }

@@ -19,6 +19,9 @@
 			
 			<nav>
 				<ul>
+					<li>
+						<a href="./user/register">회원 가입</a>
+					</li>
 					<li> <!-- TODO -->
 						<a href="">로그인</a>
 					</li>
