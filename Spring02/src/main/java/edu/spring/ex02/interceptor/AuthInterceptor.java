@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriUtils;
 
 // 로그인 상태인지 아닌지(세션에 로그인 아이디가 저장되어 있는지)를 체크해서, 
 // 로그인 상태이면 원래 가고자 했던 페이지로 진행
@@ -31,12 +32,30 @@ public class AuthInterceptor implements HandlerInterceptor {
 		String signInUserId = (String) session.getAttribute("signInUserId");
 		if (signInUserId != null) { // 로그인 정보가 있으면
 			log.info("로그인 아이디: {}", signInUserId);
-			return true;
+			return true; // 요청을 계속 진행
 		} else { // 로그인 정보가 없으면
 			log.info("로그인 안 됨.");
-			// redirect
-			response.sendRedirect("/ex02/user/signin");
-			return false;
+			
+			// 요청 URL 정보를 찾아서, signin 요청에 요청 파라미터를 추가
+			String reqUrl = request.getRequestURL().toString();
+			log.debug("request URL: {}", reqUrl);
+			
+			// 질의 문자열이 있는지 확인
+			String query = request.getQueryString();
+			log.debug("Query String: {}", query);
+			
+			String target = "";
+			// 특수기호(:, /, ?)들을 UTF-8 코드값으로 변환
+			if (query == null) { // 질의 문자열(query string)이 없는 경우
+				target = UriUtils.encode(reqUrl, "UTF-8");
+			} else { // 질의 문자열(query string)이 있는 경우
+				target = UriUtils.encode(reqUrl + "?" + query, "UTF-8");
+			}
+			log.debug("URI 디코딩 후: {}", target);
+			
+			response.sendRedirect("/ex02/user/signin?url=" + target);
+			
+			return false; // 기존 요청을 진행하지 않음
 		}
 		
 	}

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,23 +51,24 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
-	public void signIn() {
+	public void signIn(String url, Model model) {
 		log.info("signIn() GET 호출");
+		
+		// 로그인 페이지가 요청됐을 때, 로그인 성공 후 이동할 페이지가 질의 문자열에 포함되어 있는 경우
+		if (url != null && !url.equals("")) { 
+			model.addAttribute("url", url); // 로그인 이후 이동할 페이지를 저장
+		}
 	}
 	
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-	public String signIn(User user, HttpSession session) {
+	public void signIn(User user, Model model) {
 		log.info("signIn({}) POST 호출", user);
 		
 		User signInUser = userService.checkSignIn(user);
-		if (signInUser != null) { // 아이디, 비밀번호가 일치하는 사용자 정보가 테이블에 있으면(not null)
-			// 로그인 정보를 세션에 저장 -> 메인 이동
-			session.setAttribute("signInUserId", signInUser.getUserid());
-			return "redirect:/";
-		} else { // 아이디, 비밀번호가 일치하는 사용자 정보가 테이블에 없으면(null)
-			// 로그인 실패 -> 로그인 페이지 다시 보여주기
-			return "redirect:/user/signin";
-		}		
+		log.info("signInUser: {}", signInUser); //-> 로그인 O: not null, 로그인 X: null
+		
+		// 로그인 여부를 판단할 수 있는 정보를 Model 객체에 속성으로 저장
+		model.addAttribute("signInUser", signInUser);
 	}
 	
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)

@@ -28,12 +28,19 @@
 	<!-- HandlerIntercept authInterceptor = new AuthInterceptor(); -->
 	<beans:bean id="authInterceptor" 
 		class="edu.spring.ex02.interceptor.AuthInterceptor" />
+	<beans:bean id="signInInterceptor" 
+		class="edu.spring.ex02.interceptor.SignedInInterceptor" />
 	
 	<interceptors>
-		<interceptor>
+		<interceptor> <!-- 게시판 기능들 중 로그인이 필수인 서비스들 -->
 			<mapping path="/board/insert"/> <!-- 새 글 작성 -->
 			<mapping path="/board/detail"/> <!-- 상세보기 -->
+			<mapping path="/board/delete"/> <!-- 글 삭제 -->
 			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor> <!-- 아이디/패스워드 확인 후 로그인 성공/실패 처리 -->
+			<mapping path="/user/signin"/>
+			<beans:ref bean="signInInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

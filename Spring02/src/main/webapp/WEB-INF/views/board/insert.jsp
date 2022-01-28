@@ -29,7 +29,7 @@
 						<textarea rows="5" name="content" placeholder="내용 입력" required></textarea>
 					</div>
 					<div>
-						<input type="text" name="userid" value="guest" required readonly />
+						<input type="text" name="userid" value="${signInUserId}" required readonly />
 					</div>
 					<div>
 						<input type="submit" value="작성 완료">

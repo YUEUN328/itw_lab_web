@@ -29,7 +29,7 @@
 					</li>
 				</c:if>
 				<c:if test="${not empty signInUserId}"> <%-- 로그인 되어 있는 경우 --%>
-					<li>
+					<li> <span>${signInUserId}</span>
 						<a href="./user/signout">로그아웃</a>
 					</li>
 				</c:if>	
