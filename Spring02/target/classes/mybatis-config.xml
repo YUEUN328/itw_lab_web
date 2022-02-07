@@ -23,6 +23,12 @@
 		<property name="COL_EMAIL" value="email" />
 		<property name="COL_POINTS" value="points" />
 		
+		<!-- REPLIES 테이블 관련 상수들 -->
+		<!-- userid, bno는 기존에 정의된 프로퍼티를 사용 -->
+		<property name="TABLE_REPLIES" value="replies"/>
+		<property name="COL_RNO" value="rno"/>
+		<property name="COL_RTEXT" value="rtext"/>
+		<property name="COL_REGDATE" value="regdate"/>
 	</properties>
 	
 	<typeAliases>
