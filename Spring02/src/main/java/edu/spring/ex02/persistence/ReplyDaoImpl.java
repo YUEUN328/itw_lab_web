@@ -28,7 +28,7 @@ public class ReplyDaoImpl implements ReplyDao {
 
 	@Override
 	public List<Reply> read(int bno) {
-		log.info("read(bno={})", bno);
+		log.info("read(bno={}) 호출", bno);
 		
 		return sqlSession.selectList(NAMESPACE + ".select", bno);
 	}
