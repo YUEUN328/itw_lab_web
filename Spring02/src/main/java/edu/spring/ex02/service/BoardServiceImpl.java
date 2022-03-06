@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import edu.spring.ex02.domain.Board;
 import edu.spring.ex02.persistence.BoardDao;
+import edu.spring.ex02.persistence.UserDao;
 
 @Service // 스프링 컨테이너(프레임워크)가 서비스 컴포넌트로 생성하고 관리하기 위해서
 public class BoardServiceImpl implements BoardService {
@@ -16,6 +17,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	// Service 계층은 Persistence(Repository) 계층의 객체를 주입(injection) 받아서 사용
 	@Autowired private BoardDao boardDao;
+	@Autowired private UserDao userDao;
 	
 	@Override
 	public List<Board> select() {
@@ -30,7 +32,8 @@ public class BoardServiceImpl implements BoardService {
 		
 		// (1) boards 테이블에 새 글 insert
 		int result = boardDao.create(board);
-		// (2) TODO: 글을 작성한 사용자의 points를 10점 증가
+		// (2) 글을 작성한 사용자의 points를 10점 증가.
+		userDao.updatePoints(board.getUserid(), 10);
 		
 		return result;
 	}

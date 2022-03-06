@@ -3,6 +3,7 @@ package edu.spring.ex02.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import edu.spring.ex02.domain.User;
 
@@ -30,5 +31,13 @@ public interface UserMapper {
 	
 	@Select(CHECK_SIGN_IN)
 	User selectByIdAndPwd(User user);
+	
+	// 사용자 포인트 업데이트
+	String UPDATE_USER_POINTS = 
+			"UPDATE ${TABLE_USERS} SET ${COL_POINTS} = ${COL_POINTS} + #{points} "
+			+ "WHERE ${COL_USERID} = #{userid}";
+		
+	@Update(UPDATE_USER_POINTS)
+	int updateUserPoints(Object params);	
 	
 }
